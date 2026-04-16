@@ -1,19 +1,28 @@
 # hanhan1978/ffi-sdl3
 
-PHP FFI で SDL3 と SDL3_ttf を扱うための小さなラッパーです。
-`overlay.php` から FFI 直叩きを消すために切り出した、独立した Composer パッケージです。
+Small PHP FFI bindings for SDL3 and SDL3_ttf.
 
-## 対象
+This package was split out from the overlay demo so it can be reused as an
+independent Composer library.
 
-- PHP 8.4 以上
+## Requirements
+
+- PHP 8.4 or later
 - `ext-ffi`
 - SDL3
 - SDL3_ttf
-- ライセンスは Apache-2.0
+- Apache-2.0 license
 
-## 使い方
+## Installation
 
-ローカル開発では、チェックアウト先の親プロジェクトの `composer.json` に path repository を追加してから `composer install` します。
+```bash
+composer require hanhan1978/ffi-sdl3:^0.1
+```
+
+## Local development
+
+If you are developing against a local checkout, add a path repository to the
+parent project's `composer.json` and run `composer install`.
 
 ```json
 {
@@ -26,7 +35,7 @@ PHP FFI で SDL3 と SDL3_ttf を扱うための小さなラッパーです。
 }
 ```
 
-利用例:
+## Usage
 
 ```php
 use SDL3\BlendMode;
@@ -55,16 +64,16 @@ $texture = $renderer->createTextureFromSurface($surface);
 $surface->destroy();
 ```
 
-## ライブラリ探索
+## Library lookup
 
-`LibraryFinder` は次の順で SDL3 / SDL3_ttf を探します。
+`LibraryFinder` searches for SDL3 and SDL3_ttf in this order:
 
 - `SDL3_LIBRARY_PATH`
 - `SDL3_TTF_LIBRARY_PATH`
 - `pkg-config`
-- Homebrew の代表的なパス
+- Common Homebrew paths
 
-## 公開 API
+## Public API
 
 - `SDL3\SDL`
 - `SDL3\Window`
@@ -79,6 +88,6 @@ $surface->destroy();
 - `SDL3\TTF\TTF`
 - `SDL3\TTF\Font`
 
-## ライセンス
+## License
 
 Apache-2.0
