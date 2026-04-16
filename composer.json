@@ -4,6 +4,15 @@
     "description": "PHP FFI bindings for SDL3 and SDL3_ttf",
     "type": "library",
     "license": "Apache-2.0",
+    "homepage": "https://github.com/hanhan1978/ffi-sdl3",
+    "keywords": [
+        "php",
+        "ffi",
+        "sdl3",
+        "sdl",
+        "ttf",
+        "macos"
+    ],
     "require": {
         "php": ">=8.4",
         "ext-ffi": "*"
