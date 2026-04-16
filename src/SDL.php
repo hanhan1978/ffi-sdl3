@@ -104,6 +104,6 @@ final class SDL
 
     public static function errorFrom(FFI $ffi): string
     {
-        return FFI::string($ffi->SDL_GetError());
+        return (string) $ffi->SDL_GetError();
     }
 }
