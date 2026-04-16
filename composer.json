@@ -1,0 +1,16 @@
+{
+    "name": "hanhan1978/ffi-sdl3",
+    "version": "0.1.0",
+    "description": "PHP FFI bindings for SDL3 and SDL3_ttf",
+    "type": "library",
+    "license": "Apache-2.0",
+    "require": {
+        "php": ">=8.4",
+        "ext-ffi": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "SDL3\\": "src/"
+        }
+    }
+}
