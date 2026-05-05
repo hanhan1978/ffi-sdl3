@@ -60,6 +60,11 @@ final class SDL
         $this->ffi->SDL_Delay($ms);
     }
 
+    public function ticks(): int
+    {
+        return (int) $this->ffi->SDL_GetTicks();
+    }
+
     /**
      * @return array{0: int, 1: float, 2: float}
      */
@@ -80,7 +85,7 @@ final class SDL
         $event = $this->newCData('SDL_Event');
 
         while ($this->ffi->SDL_PollEvent(FFI::addr($event))) {
-            $parsed = Event::fromType((int) $event->type);
+            $parsed = Event::fromCData($event);
             if ($parsed !== null) {
                 yield $parsed;
             }

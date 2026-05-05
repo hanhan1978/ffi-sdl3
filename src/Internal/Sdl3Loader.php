@@ -24,9 +24,71 @@ final class Sdl3Loader
         typedef struct SDL_Renderer SDL_Renderer;
         typedef struct SDL_Texture SDL_Texture;
         typedef struct SDL_Surface SDL_Surface;
+        typedef Uint32 SDL_KeyboardID;
+        typedef Uint32 SDL_MouseID;
+        typedef Uint32 SDL_MouseButtonFlags;
+        typedef Uint32 SDL_Keycode;
+        typedef Uint16 SDL_Keymod;
+        typedef int    SDL_Scancode;
+
+        typedef struct SDL_KeyboardEvent
+        {
+            Uint32 type;
+            Uint32 reserved;
+            Uint64 timestamp;
+            Uint32 windowID;
+            SDL_KeyboardID which;
+            SDL_Scancode scancode;
+            SDL_Keycode key;
+            SDL_Keymod mod;
+            Uint16 raw;
+            bool down;
+            bool repeat;
+        } SDL_KeyboardEvent;
+
+        typedef struct SDL_MouseMotionEvent
+        {
+            Uint32 type;
+            Uint32 reserved;
+            Uint64 timestamp;
+            Uint32 windowID;
+            SDL_MouseID which;
+            SDL_MouseButtonFlags state;
+            float x;
+            float y;
+            float xrel;
+            float yrel;
+        } SDL_MouseMotionEvent;
+
+        typedef struct SDL_MouseButtonEvent
+        {
+            Uint32 type;
+            Uint32 reserved;
+            Uint64 timestamp;
+            Uint32 windowID;
+            SDL_MouseID which;
+            Uint8 button;
+            bool down;
+            Uint8 clicks;
+            Uint8 padding;
+            float x;
+            float y;
+        } SDL_MouseButtonEvent;
+
+        typedef struct SDL_QuitEvent
+        {
+            Uint32 type;
+            Uint32 reserved;
+            Uint64 timestamp;
+        } SDL_QuitEvent;
+
         typedef union SDL_Event {
             Uint32 type;
-            char   padding[128];
+            SDL_KeyboardEvent key;
+            SDL_MouseMotionEvent motion;
+            SDL_MouseButtonEvent button;
+            SDL_QuitEvent quit;
+            Uint8 padding[128];
         } SDL_Event;
 
         typedef Uint32 SDL_InitFlags;
@@ -48,6 +110,7 @@ final class Sdl3Loader
         bool          SDL_RenderPresent(SDL_Renderer* renderer);
         bool          SDL_SetRenderDrawBlendMode(SDL_Renderer* renderer, int blendMode);
         bool          SDL_RenderFillRect(SDL_Renderer* renderer, const SDL_FRect* rect);
+        bool          SDL_RenderLine(SDL_Renderer* renderer, float x1, float y1, float x2, float y2);
         SDL_Texture*  SDL_CreateTextureFromSurface(SDL_Renderer* renderer, SDL_Surface* surface);
         bool          SDL_SetTextureBlendMode(SDL_Texture* texture, int blendMode);
         bool          SDL_SetTextureAlphaMod(SDL_Texture* texture, Uint8 alpha);
@@ -57,7 +120,9 @@ final class Sdl3Loader
         void          SDL_DestroySurface(SDL_Surface* surface);
         Uint32        SDL_GetGlobalMouseState(float* x, float* y);
         bool          SDL_PollEvent(SDL_Event* event);
+        Uint64        SDL_GetTicks(void);
         void          SDL_Delay(Uint32 ms);
+        SDL_Scancode  SDL_GetScancodeFromKey(SDL_Keycode key, SDL_Keymod* modstate);
         const char*   SDL_GetError(void);
     C;
 

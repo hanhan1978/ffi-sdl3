@@ -54,6 +54,13 @@ final class Renderer
         }
     }
 
+    public function renderLine(float $x1, float $y1, float $x2, float $y2): void
+    {
+        if (!$this->sdl->ffi()->SDL_RenderLine($this->renderer(), $x1, $y1, $x2, $y2)) {
+            throw new SdlException('SDL_RenderLine failed: ' . SDL::errorFrom($this->sdl->ffi()));
+        }
+    }
+
     public function renderTexture(Texture $texture, ?Rect $src, Rect $dst): void
     {
         $srcPtr = null;
