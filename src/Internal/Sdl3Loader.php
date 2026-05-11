@@ -9,6 +9,7 @@ final class Sdl3Loader
 {
     private const CDEF = <<<'C'
         typedef unsigned char       Uint8;
+        typedef unsigned short      Uint16;
         typedef unsigned int        Uint32;
         typedef unsigned long long  Uint64;
 
